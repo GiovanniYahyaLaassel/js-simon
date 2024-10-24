@@ -1,5 +1,4 @@
 
-
 //Creo dei numeri casuali in pagina utilizzando una funzione 
 function generateRandomNumbers() {
     // Creo un array vuoto per generare i numeri casuali
@@ -11,5 +10,27 @@ function generateRandomNumbers() {
         randomNumbers.push(randomNumber);
         console.log(randomNumbers);
     }
+
+
+    // Seleziono l'elemento ul dove mostrerò i numeri 
+    const numberList = document.getElementById('numbers-list') ;
+
+    // pulisco elementi precedenti
+    numberList.innerHTML = '';
+
+    // Ciclo per creare un elemento li per ogni numero casuale ed aggiungerlo alla lista
+    for (let i = 0; i <randomNumbers.length; i++) {
+        // creo l'elemento li
+        const listItem = document.createElement('li');
+        // imposto il numero come l'elemento della lista 
+        listItem.textContent = randomNumbers[i]
+        // aggiungo li alla lista 
+        numberList.appendChild(listItem); 
+    }
 }
+// Chiamo la funzione quando il dom e caricato
+document.addEventListener('DOMContentLoaded', function(){
+    generateRandomNumbers();
+});
+
 
