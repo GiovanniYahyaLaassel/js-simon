@@ -1,7 +1,8 @@
 //Creo dei numeri casuali in pagina utilizzando una funzione 
+let randomNumbers = [];
 function generateRandomNumbers() {
     // Creo un array vuoto per generare i numeri casuali
-    const randomNumbers = [];
+    // const randomNumbers = [];
     
     // Creo un ciclo for per generare numeri tra 1 e 50
     for (let i = 0; i < 5; i++) {
@@ -51,23 +52,35 @@ function generateRandomNumbers() {
     for( let i = 0; i < inputs.length; i++ ) {
         usersNumber.push(parseInt(inputs[i]));  //aggiungo i numeri inseriti all'array
     }
-};
 
-// confornto i numeri generati con quelli dell'utente 
-
-let correctNumbers = 0 ;
-// ciclo per vedere se il numero e corretto
-for (let i = 0; i < usersNumber.length; i++) {
-    //controllo se il numero e presente 
-    if (randomNumbers.includes(usersNumber[i])); {
-        correctNumbers++ // incremento il numero corretto
+    // confornto i numeri generati con quelli dell'utente 
+    let correctNumbers = 0 ;
+    // ciclo per vedere se il numero e corretto
+    for (let i = 0; i < usersNumber.length; i++) {
+        //controllo se il numero e presente 
+        if (randomNumbers.includes(usersNumber[i])) {
+            correctNumbers++ // incremento il numero corretto
+        }
     }
-}
+
+    // mostro il risultato all'utente 
+    const message = document.getElementById('message');
+    message.textContent = `Hai indovianto ${correctNumbers} numeri su 5`;
+
+};
 
 
 // Chiamo la funzione quando il dom e caricato
 document.addEventListener('DOMContentLoaded', function(){
     generateRandomNumbers();
+
+         // aggiungo l'evento al formm per verificare che i nujeri sono corretti
+         const form = document.getElementById('answers-form');
+         form.addEventListener('submit', function(event){
+             event.preventDefault();
+             checkNumber();
+         })
+
 });
 
 
