@@ -1,4 +1,3 @@
-
 //Creo dei numeri casuali in pagina utilizzando una funzione 
 function generateRandomNumbers() {
     // Creo un array vuoto per generare i numeri casuali
@@ -10,7 +9,6 @@ function generateRandomNumbers() {
         randomNumbers.push(randomNumber);
         console.log(randomNumbers);
     }
-
 
     // Seleziono l'elemento ul dove mostrerò i numeri 
     const numberList = document.getElementById('numbers-list') ;
@@ -27,10 +25,22 @@ function generateRandomNumbers() {
         // aggiungo li alla lista 
         numberList.appendChild(listItem); 
     }
-}
+
+    //  Impostare un timer di 30 secondi per nascondere i numeri 
+    setTimeout(function(){
+    numberList.innerHTML = '';  //nascondo i numeri 
+        console.log('I numeri sono stai nascosti')
+        
+    },30000); 
+
+};
+
 // Chiamo la funzione quando il dom e caricato
 document.addEventListener('DOMContentLoaded', function(){
     generateRandomNumbers();
 });
+
+
+
 
 
