@@ -42,12 +42,28 @@ function generateRandomNumbers() {
 };
 
 // creo una funzione che mi permetta di confrontare i numeri inseriti dell'utente
+
     function checkNumber() {
         // recupero i numeri inseriti
-        const usersNUmber =[];
+        const usersNumber =[];
         const inputs = document.querySelectorAll('#input-group input');
-
+    // utilizzo un ciclo per prendere i numeri
+    for( let i = 0; i < inputs.length; i++ ) {
+        usersNumber.push(parseInt(inputs[i]));  //aggiungo i numeri inseriti all'array
     }
+};
+
+// confornto i numeri generati con quelli dell'utente 
+
+let correctNumbers = 0 ;
+// ciclo per vedere se il numero e corretto
+for (let i = 0; i < usersNumber.length; i++) {
+    //controllo se il numero e presente 
+    if (randomNumbers.includes(usersNumber[i])); {
+        correctNumbers++ // incremento il numero corretto
+    }
+}
+
 
 // Chiamo la funzione quando il dom e caricato
 document.addEventListener('DOMContentLoaded', function(){
