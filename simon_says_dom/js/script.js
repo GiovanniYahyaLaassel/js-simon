@@ -33,7 +33,21 @@ function generateRandomNumbers() {
         
     },30000); 
 
+         
+    // Mostro gli input eliminando la classe d-none
+    const inputForm = document.getElementById('answers-form');
+    // rimuovo la classe che viene nascosta dal display none
+    inputForm.classList.remove('d-none');
+
 };
+
+// creo una funzione che mi permetta di confrontare i numeri inseriti dell'utente
+    function checkNumber() {
+        // recupero i numeri inseriti
+        const usersNUmber =[];
+        const inputs = document.querySelectorAll('#input-group input');
+
+    }
 
 // Chiamo la funzione quando il dom e caricato
 document.addEventListener('DOMContentLoaded', function(){
