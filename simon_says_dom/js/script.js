@@ -49,23 +49,45 @@ function generateRandomNumbers() {
         const usersNumber =[];
         const inputs = document.querySelectorAll('#input-group input');
     // utilizzo un ciclo per prendere i numeri
-    for( let i = 0; i < inputs.length; i++ ) {
+    for( let i = 0; i < inputs.length; i++) {
         usersNumber.push(parseInt(inputs[i]));  //aggiungo i numeri inseriti all'array
     }
 
     // confornto i numeri generati con quelli dell'utente 
     let correctNumbers = 0 ;
+    let correctList = [];
     // ciclo per vedere se il numero e corretto
     for (let i = 0; i < usersNumber.length; i++) {
         //controllo se il numero e presente 
         if (randomNumbers.includes(usersNumber[i])) {
             correctNumbers++ // incremento il numero corretto
+            correctList.push(usersNumber);
         }
     }
 
-    // mostro il risultato all'utente 
-    const message = document.getElementById('message');
-    message.textContent = `Hai indovianto ${correctNumbers} numeri su 5`;
+    // funzione che mostra i risultati all'utente
+    function displayResults() {
+        // mostro il numero totale dei numeri indovinati 
+        const message = document.getElementById('message');
+        message.textContent = `Hai indovianto ${correctNumbers} numeri su 5`;
+        // seleziono l'elemento i numerri corretti
+        const correctNumbersList = document.getElementById('correct-numbers');
+        correctNumbersList.innerHTML = ''; // svuoto il contenuto precedente 
+
+        // faccio un ciclo che mostra i risulati indovinati 
+        if (correctList.length > 0) {
+            for (let i = 0; i < correctList.length; i++) {
+                const listItem = document.createElement('li');
+                listItem.textContent = `Numero corretto ${correctList[i]}`;
+                correctNumbersList.appendChild(listItem);
+            }
+        } else {
+            co
+        
+        }
+
+
+    } 
 
 };
 
