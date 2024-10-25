@@ -2,7 +2,7 @@
 let randomNumbers = [];
 function generateRandomNumbers() {
     // Creo un array vuoto per generare i numeri casuali
-    // const randomNumbers = [];
+     randomNumbers = [];
     
     // Creo un ciclo for per generare numeri tra 1 e 50
     for (let i = 0; i < 5; i++) {
@@ -30,7 +30,7 @@ function generateRandomNumbers() {
     //  Impostare un timer di 30 secondi per nascondere i numeri 
     setTimeout(function(){
     numberList.innerHTML = '';  //nascondo i numeri 
-        console.log('I numeri sono stai nascosti')
+        console.log('I numeri sono stati nascosti')
         
     },30000); 
 
@@ -42,15 +42,19 @@ function generateRandomNumbers() {
 
 };
 
-// creo una funzione che mi permetta di confrontare i numeri inseriti dell'utente
+    // creo una funzione che mi permetta di confrontare i numeri inseriti dell'utente
 
     function checkNumber() {
         // recupero i numeri inseriti
         const usersNumber =[];
         const inputs = document.querySelectorAll('#input-group input');
+
     // utilizzo un ciclo per prendere i numeri
     for( let i = 0; i < inputs.length; i++) {
-        usersNumber.push(parseInt(inputs[i]));  //aggiungo i numeri inseriti all'array
+        const value = parseInt(inputs[i].value);  //aggiungo i numeri inseriti all'array
+        if (!isNaN(value)){
+            usersNumber.push(value);
+        }
     }
 
     // confornto i numeri generati con quelli dell'utente 
@@ -61,16 +65,20 @@ function generateRandomNumbers() {
         //controllo se il numero e presente 
         if (randomNumbers.includes(usersNumber[i])) {
             correctNumbers++ // incremento il numero corretto
-            correctList.push(usersNumber);
+            correctList.push(usersNumber[i]);
         }
     }
 
+
     // funzione che mostra i risultati all'utente
+    displayResults(correctNumbers, correctList);
+
     function displayResults() {
         // mostro il numero totale dei numeri indovinati 
         const message = document.getElementById('message');
         message.textContent = `Hai indovianto ${correctNumbers} numeri su 5`;
         // seleziono l'elemento i numerri corretti
+        
         const correctNumbersList = document.getElementById('correct-numbers');
         correctNumbersList.innerHTML = ''; // svuoto il contenuto precedente 
 
@@ -82,7 +90,7 @@ function generateRandomNumbers() {
                 correctNumbersList.appendChild(listItem);
             }
         } else {
-            co
+            correctNumbersList.textContent = 'Non hai indovinato nessun numero';
         
         }
 
