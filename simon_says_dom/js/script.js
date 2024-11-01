@@ -1,5 +1,24 @@
-//Creo dei numeri casuali in pagina utilizzando una funzione 
+//Definisco tutte le varibili e costanti 
+
 let randomNumbers = [];
+
+const numberList = document.getElementById('numbers-list') ;  // Seleziono l'elemento ul dove mostrerò i numeri 
+const inputForm = document.getElementById('answers-form'); //Seleziono il form con gli input per inserire i numeri
+const form = document.getElementById('answers-form'); // Seleziono per l'evento di verifica
+const message = document.getElementById('message'); // Seleziono il messaggio di risultato
+const correctNumbersList = document.getElementById('correct-numbers'); //Seleziono per mostare i numeri coretti
+document.addEventListener('DOMContentLoaded', initializeGame);//// Chiamo la funzione quando il dom e caricato
+
+function initializeGame() {
+    generateRandomNumbers();
+    // controllo che i numeri  siano corretti
+    form.addEventListener('submit', function(event){
+        event.preventDefault();
+        checkNumber();
+    });
+};
+
+
 function generateRandomNumbers() {
     // Creo un array vuoto per generare i numeri casuali
      randomNumbers = [];
@@ -10,9 +29,6 @@ function generateRandomNumbers() {
         randomNumbers.push(randomNumber);
         console.log(randomNumbers);
     }
-
-    // Seleziono l'elemento ul dove mostrerò i numeri 
-    const numberList = document.getElementById('numbers-list') ;
 
     // pulisco elementi precedenti
     numberList.innerHTML = '';
@@ -27,20 +43,26 @@ function generateRandomNumbers() {
         numberList.appendChild(listItem); 
     }
 
+ 
     //  Impostare un timer di 30 secondi per nascondere i numeri 
-    setTimeout(function(){
-    numberList.innerHTML = '';  //nascondo i numeri 
-        console.log('I numeri sono stati nascosti')
-        
-    },30000); 
+    let countdown = 30;
+    const countdownDisplay = document.getElementById('countdown');
+    countdownDisplay.textContent = `Tempo rimante: ${countdown} s`;
 
-         
-    // Mostro gli input eliminando la classe d-none
-    const inputForm = document.getElementById('answers-form');
-    // rimuovo la classe che viene nascosta dal display none
-    inputForm.classList.remove('d-none');
+    const countdownInterval = setInterval(() => {
+        countdown--;
+        countdownDisplay.textContent = `Tempo rimante: ${countdown} s`;
+        if (countdown === 0) {
+            clearInterval(countdownInterval);
+            numberList.innerHTML = ''; // nascondo i numeri
+            console.log('I numeri sono stati nascosti');
+            inputForm.classList.remove('d-none'); //Rimuovo la classe d-none
+            inputForm.classList.add('answers-form-visible'); //mostro il form per l'inserimento dei numeri
 
+        }
+    },300);
 };
+
 
     // creo una funzione che mi permetta di confrontare i numeri inseriti dell'utente
 
@@ -75,11 +97,8 @@ function generateRandomNumbers() {
 
     function displayResults() {
         // mostro il numero totale dei numeri indovinati 
-        const message = document.getElementById('message');
         message.textContent = `Hai indovianto ${correctNumbers} numeri su 5`;
         // seleziono l'elemento i numerri corretti
-        
-        const correctNumbersList = document.getElementById('correct-numbers');
         correctNumbersList.innerHTML = ''; // svuoto il contenuto precedente 
 
         // faccio un ciclo che mostra i risulati indovinati 
@@ -93,25 +112,8 @@ function generateRandomNumbers() {
             correctNumbersList.textContent = 'Non hai indovinato nessun numero';
         
         }
-
-
     } 
-
 };
-
-
-// Chiamo la funzione quando il dom e caricato
-document.addEventListener('DOMContentLoaded', function(){
-    generateRandomNumbers();
-
-         // aggiungo l'evento al formm per verificare che i nujeri sono corretti
-         const form = document.getElementById('answers-form');
-         form.addEventListener('submit', function(event){
-             event.preventDefault();
-             checkNumber();
-         })
-
-});
 
 
 
